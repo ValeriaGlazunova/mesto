@@ -1,0 +1,6 @@
+.profile__name-box {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 16px;  
+    width: 336px;
+}
