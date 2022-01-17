@@ -1,10 +1,10 @@
 .profile__info {
     display: flex;
     flex-direction: column;
-    padding-right: 244px;
+    max-width: 580px;
 }
 
-@media screen and (max-width:425px) {
+@media screen and (max-width:600px) {
     .profile__info {
         max-width: 282px;
         padding: 0;
