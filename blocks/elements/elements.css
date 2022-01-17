@@ -8,3 +8,19 @@
     margin: 0 auto 67px;
     justify-content: center;
 }
+
+@media screen and (max-width: 900px) {
+    .elements {
+        grid-template-columns: repeat(2, 282px);
+        grid-template-rows: repeat(3, 362px);
+    }   
+}
+
+@media screen and (max-width: 425px) {
+    .elements {
+        grid-template-columns: 282px;
+        grid-template-rows: repeat(6, 362px);
+        gap: 20px;
+        margin: 0 auto 48px;
+    }
+}
