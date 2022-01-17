@@ -5,6 +5,8 @@
     background-position: center;
     width: 24px;
     height: 24px;
-    box-sizing: border-box;
     border: 1px solid #FFFFFF;
+    background-color: #000000;
+    align-self: flex-end;
+    margin-bottom: 8px;
 }
