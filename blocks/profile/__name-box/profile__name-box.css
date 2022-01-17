@@ -2,5 +2,11 @@
     display: flex;
     flex-direction: row;
     padding-bottom: 16px;  
-    width: 336px;
+}
+
+@media screen and (max-width: 425px) {
+    .profile__name-box {
+        padding-bottom: 14px;
+        justify-content: center;
+    }
 }
