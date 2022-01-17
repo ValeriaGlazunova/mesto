@@ -9,4 +9,10 @@
     background-color: #000000;
     align-self: flex-end;
     margin-bottom: 8px;
+    box-sizing: border-box;
+    transition: opacity .3s;
+}
+
+.profile__edit-button:hover {
+    opacity: .6;
 }
