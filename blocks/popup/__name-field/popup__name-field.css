@@ -1,0 +1,16 @@
+.popup__name-field {
+    font-family: inherit;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+    padding: 0 0 13px;
+    margin: 0 36px 30px;
+}
+
+.popup__name-field::placeholder {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 17px;
+    color: #000000;
+}
