@@ -1,12 +1,13 @@
 .profile__name-box {
     display: flex;
     flex-direction: row;
-    padding-bottom: 16px;  
+    padding-bottom: 10px;
 }
 
 @media screen and (max-width: 425px) {
     .profile__name-box {
-        padding-bottom: 14px;
+        padding-bottom: 10px;
         justify-content: center;
     }
 }
+

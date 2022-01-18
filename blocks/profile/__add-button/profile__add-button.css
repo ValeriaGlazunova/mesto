@@ -11,6 +11,7 @@
     background-color: #000000;
     transition: opacity .3s;
     padding: 0;
+    margin-top: 35px;
 }
 
 .profile__add-button:hover {

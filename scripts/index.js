@@ -19,3 +19,20 @@ popup.addEventListener('click', function(event) {
         closePopup();
     }
 });
+
+let formElement = document.querySelector('.popup__container');
+let nameInput = document.querySelector('.popup__name-field');
+let jobInput = document.querySelector('.popup__description-field');
+
+function formSubmitHandler (evt) {
+    evt.preventDefault();
+    let userName = nameInput.value; 
+    let userDescription = jobInput.value; 
+    let profileName = document.querySelector('.profile__name');
+    let profileDescription = document.querySelector('.profile__description');
+    profileName.textContent = userName;
+    profileDescription.textContent = userDescription;
+    closePopup ();
+}
+
+    formElement.addEventListener('submit', formSubmitHandler); 
