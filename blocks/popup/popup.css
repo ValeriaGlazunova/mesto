@@ -1,5 +1,4 @@
 .popup {
-    display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
@@ -11,4 +10,5 @@
     opacity: 0.5;
     z-index: 1;
     box-sizing: border-box;
+    display: none;
 }
