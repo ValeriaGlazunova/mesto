@@ -14,3 +14,8 @@ function closePopup () {
 
 profileEditOpenPopupButton.addEventListener('click', openPopup);
 popupCloseButton.addEventListener('click', closePopup);
+popup.addEventListener('click', function(event) {
+    if(event.target === event.currentTarget) {
+        closePopup();
+    }
+});
