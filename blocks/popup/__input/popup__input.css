@@ -1,12 +1,12 @@
-.popup__name-field {
+.popup__input {
+    width: 100%;
     font-family: inherit;
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, .2);
     padding: 0 0 13px;
-    margin: 0 0 30px;
 }
 
-.popup__name-field::placeholder {
+.popup__input::placeholder {
     font-family: inherit;
     font-size: 14px;
     font-weight: normal;

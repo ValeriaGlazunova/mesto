@@ -101,22 +101,24 @@
       </footer>
 
       <div class="popup">
-        <form class="popup__container">
+        <div class="popup__container">
           <button class="popup__close-button" type="button"></button>
-          <h3 class="popup__heading">Редактировать профиль</h3>
+          <h2 class="popup__heading">Редактировать профиль</h2>
+          <form class="popup__form" name="profile-info">
           <input
-            class="popup__name-field"
+            class="popup__input popup__input_type_name"
             type="text"
             placeholder="Жак-Ив Кусто"
             required
           />
           <input
-            class="popup__description-field"
+            class="popup__input popup__input_type_description"
             type="text"
             placeholder="Исследователь океана"
           />
           <button class="popup__save-button" type="submit">Сохранить</button>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
     <script src="./scripts/index.js"></script>
