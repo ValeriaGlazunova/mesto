@@ -1,7 +1,8 @@
 const profileEditOpenPopupButton = document.querySelector('.profile__edit-button');
-const popupEditProfile = document.querySelector('.popup__type_edit-profile');
-const popupAddCard = document.querySelector('.popup__type_add-card');
-const popupCloseButton = document.querySelector('.popup__close-button');
+const popupEditProfile = document.querySelector('.popup_type_edit-profile');
+const popupAddCard = document.querySelector('.popup_type_add-card');
+const popupEditCloseButton = document.querySelector('.popup__close-button');
+const popupAddCardCloseButton = document.querySelector('.popup__close-button_type_add-card');
 const profileAddButton = document.querySelector('.profile__add-button');
 
 let formElement = document.querySelector('.popup__form');
@@ -43,19 +44,32 @@ const initialCards = [
 const userTemplate = document.querySelector('#template').content;
 const elements = document.querySelector('.elements');
 
-initialCards.forEach(item => {
-  renderCard(item.name, item.link, userTemplate);
-});
 
 function renderCard(name, link) {
-const userElement = userTemplate.cloneNode(true);
+  const userElement = userTemplate.cloneNode(true);
 
-userElement.querySelector('.element__image').src = link;
-userElement.querySelector('.element__image').alt = name;
-userElement.querySelector('.element__title').textContent = name;
+  userElement.querySelector('.element__image').src = link;
+  userElement.querySelector('.element__image').alt = name;
+  userElement.querySelector('.element__title').textContent = name;
 
-elements.appendChild(userElement);
-};
+  addListeners(userElement);
+  elements.appendChild(userElement);
+
+  return renderCard;
+  }
+
+  initialCards.forEach(item => {
+    let newCard = renderCard(item.name, item.link, userTemplate);
+  });
+
+  function addListeners(el) {
+    el.querySelector('.element__trash-btn').addEventListener('click', deleteCard);
+  }
+
+  function deleteCard (event) {
+    event.target.closest('.element').remove();
+    resetForm();
+  }
 
 function openPopup (popupElement) {
     popupElement.classList.add('popup_opened');
@@ -75,14 +89,17 @@ function formSubmitHandler (evt) {
     closePopup ();
 }
 
-profileEditOpenPopupButton.addEventListener('click', function (){
+profileEditOpenPopupButton.addEventListener('click', function() {
   openPopup(popupEditProfile);
 });
-profileAddButton.addEventListener('click', function () {
+profileAddButton.addEventListener('click', function() {
   openPopup(popupAddCard);
 });
-popupCloseButton.addEventListener('click', function() {
+popupEditCloseButton.addEventListener('click', function() {
   closePopup(popupEditProfile);
+});
+popupAddCardCloseButton.addEventListener('click', function() {
+  closePopup(popupAddCard);
 });
 //ниже добавлен код для закрытия popup при нажатии мимо поля popup
 //popup.addEventListener('click', function(event) {
