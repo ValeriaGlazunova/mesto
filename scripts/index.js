@@ -1,11 +1,14 @@
 const profileEditOpenPopupButton = document.querySelector('.profile__edit-button');
-const popup = document.querySelector('.popup');
+const popupEditProfile = document.querySelector('.popup__type_edit-profile');
+const popupAddCard = document.querySelector('.popup__type_add-card');
 const popupCloseButton = document.querySelector('.popup__close-button');
 const profileAddButton = document.querySelector('.profile__add-button');
 
 let formElement = document.querySelector('.popup__form');
 let nameInput = document.querySelector('.popup__input_type_name');
 let jobInput = document.querySelector('.popup__input_type_description');
+let cardNameInput = document.querySelector('.popup__input_type_card-name');
+let cardLinkInput = document.querySelector('popup__input_type_card-link');
 
 let profileName = document.querySelector('.profile__name');
 let profileDescription = document.querySelector('.profile__description');
@@ -54,16 +57,16 @@ userElement.querySelector('.element__title').textContent = name;
 elements.appendChild(userElement);
 };
 
-
-function openPopup () {
-    popup.classList.add('popup_opened');
+function openPopup (popupElement) {
+    popupElement.classList.add('popup_opened');
     nameInput.value = profileName.textContent;
     jobInput.value = profileDescription.textContent;
 }
 
-function closePopup () {
-    popup.classList.remove('popup_opened');
+function closePopup (popupElement) {
+    popupElement.classList.remove('popup_opened');
 }
+
 
 function formSubmitHandler (evt) {
     evt.preventDefault();
@@ -72,13 +75,21 @@ function formSubmitHandler (evt) {
     closePopup ();
 }
 
-profileEditOpenPopupButton.addEventListener('click', openPopup);
-popupCloseButton.addEventListener('click', closePopup);
-// ниже добавлен код для закрытия popup при нажатии мимо поля popup
+profileEditOpenPopupButton.addEventListener('click', function (){
+  openPopup(popupEditProfile);
+});
+profileAddButton.addEventListener('click', function () {
+  openPopup(popupAddCard);
+});
+popupCloseButton.addEventListener('click', function() {
+  closePopup(popupEditProfile);
+});
+//ниже добавлен код для закрытия popup при нажатии мимо поля popup
 //popup.addEventListener('click', function(event) {
-    //if(event.target === event.currentTarget) {
-        //closePopup();
+   // if(event.target === event.currentTarget) {
+      //  closePopup();
    // }
 //});
 
 formElement.addEventListener('submit', formSubmitHandler); 
+
