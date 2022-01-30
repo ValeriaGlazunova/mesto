@@ -40,12 +40,19 @@ const initialCards = [
 const userTemplate = document.querySelector('#template').content;
 const elements = document.querySelector('.elements');
 
-const userElement = userTemplate.querySelector('.element').cloneNode(true);
+initialCards.forEach(item => {
+  renderCard(item.name, item.link, userTemplate);
+});
+
+function renderCard(name, link) {
+const userElement = userTemplate.cloneNode(true);
 
 userElement.querySelector('.element__image').src = link;
+userElement.querySelector('.element__image').alt = name;
 userElement.querySelector('.element__title').textContent = name;
 
-elements.append(userElement);
+elements.appendChild(userElement);
+};
 
 
 function openPopup () {
