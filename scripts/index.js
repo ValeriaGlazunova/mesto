@@ -50,7 +50,8 @@ const initialCards = [
   initialCards.forEach(item => {
     let card = renderCard(item.name, item.link);
     
-    addCard(card);
+    elements.appendChild(card);
+    //addCard(card);
    
   });
 
@@ -77,7 +78,7 @@ function renderCard(name, link) {
   }
 
 function likeCard (event) {
-  event.target.closest('.element__like-btn').classList.add('element__like-btn_active');
+  event.target.closest('.element__like-btn').classList.toggle('element__like-btn_active');
 }
 
 function openPopup (popupElement) {
