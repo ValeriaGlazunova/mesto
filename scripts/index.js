@@ -48,36 +48,24 @@ const initialCards = [
 
   //добавление массива карточек на страницу
   initialCards.forEach(item => {
-    let card = renderCard(item.name, item.link, userTemplate);
- 
-    //elements.appendChild(card);
+    let card = renderCard(item.name, item.link);
+    
+    addCard(card);
+   
   });
 
   //создание карточки
 function renderCard(name, link) {
-  const card = userTemplate.cloneNode(true);
-
-  card.querySelector('.element__image').src = link;
-  card.querySelector('.element__image').alt = name;
-  card.querySelector('.element__title').innerText = name;
-
-  addListeners(card);
-  elements.appendChild(card);
-  return renderCard;
-} 
-
-
- //создание новой карточки из данных от пользователя
-  function renderNewCard() {
   const newCard = userTemplate.cloneNode(true);
 
-  newCard.querySelector('.element__image').src = cardLinkInput.value;
-  newCard.querySelector('.element__image').alt = cardNameInput.value;
-  newCard.querySelector('.element__title').innerText = cardNameInput.value;
+  newCard.querySelector('.element__image').src = link;
+  newCard.querySelector('.element__image').alt = name;
+  newCard.querySelector('.element__title').innerText = name;
 
-    addListeners(newCard);
-    elements.prepend(newCard);
-  }
+  addListeners(newCard);
+ 
+  return newCard;
+};
 
   function addListeners(el) {
     el.querySelector('.element__trash-btn').addEventListener('click', deleteCard);
@@ -111,21 +99,14 @@ function formSubmitHandlerProfileEdit (evt) {
 
 function formSubmitHandlerAddCard (evt) {
   evt.preventDefault();
-  let cardName = cardNameInput.value;
-  let cardNameSave = document.querySelector('.element__title');
-  let cardText = cardLinkInput.value;
-  let cardTextSave = document.querySelector('.element__image');
-  cardNameSave.textContent = cardName;
-  cardTextSave.src = cardText;
-  cardTextSave.alt = cardText;
+  let card = renderCard(cardNameInput.value, cardLinkInput.value);
+  addCard(card);
   closePopup(popupAddCard);
 };
 
-function addCard(event) {
-  renderNewCard(cardNameInput.value, cardLinkInput.value);
-//let newCard = renderCard(cardNameInput.value, cardLinkInput.value);
-//elements.prepend(newCard);
-}
+function addCard(card) {
+elements.prepend(card);
+};
 
 
 profileEditOpenPopupButton.addEventListener('click', function() {
@@ -150,4 +131,4 @@ popupAddCardCloseButton.addEventListener('click', function() {
 
 formElement.addEventListener('submit', formSubmitHandlerProfileEdit); 
 formAddElement.addEventListener('submit', formSubmitHandlerAddCard);
-popupSaveCardButton.addEventListener('click', addCard);
+
