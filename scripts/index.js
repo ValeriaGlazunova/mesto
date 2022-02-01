@@ -1,8 +1,10 @@
 const profileEditOpenPopupButton = document.querySelector('.profile__edit-button');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupAddCard = document.querySelector('.popup_type_add-card');
+const popupImageOpen = document.querySelector('.popup_type_img-open');
 const popupEditCloseButton = document.querySelector('.popup__close-button');
 const popupAddCardCloseButton = document.querySelector('.popup__close-button_type_add-card');
+const popupImageOpenCloseButton = document.querySelector('.popup__close-button_type_img-open');
 const profileAddButton = document.querySelector('.profile__add-button');
 const popupSaveCardButton = document.querySelector('.popup__save-button_type_add-card');
 
@@ -12,6 +14,8 @@ let nameInput = document.querySelector('.popup__input_type_name');
 let jobInput = document.querySelector('.popup__input_type_description');
 let cardNameInput = document.querySelector('.popup__input_type_card-name');
 let cardLinkInput = document.querySelector('.popup__input_type_card-link');
+let imagePopup = document.querySelector('.popup__image');
+let subtitlePopup = document.querySelector('.popup__subtitle');
 
 let profileName = document.querySelector('.profile__name');
 let profileDescription = document.querySelector('.profile__description');
@@ -49,7 +53,7 @@ const initialCards = [
   //добавление массива карточек на страницу
   initialCards.forEach(item => {
     let card = renderCard(item.name, item.link);
-    
+
     elements.appendChild(card);
     //addCard(card);
    
@@ -63,6 +67,12 @@ function renderCard(name, link) {
   newCard.querySelector('.element__image').alt = name;
   newCard.querySelector('.element__title').innerText = name;
 
+  newCard.querySelector('.element__image').addEventListener('click',() => {
+  imagePopup.src = link;
+  subtitlePopup.textContent = name;
+  popupImageOpen.classList.add('popup_opened');
+});
+
   addListeners(newCard);
  
   return newCard;
@@ -71,7 +81,11 @@ function renderCard(name, link) {
   function addListeners(el) {
     el.querySelector('.element__trash-btn').addEventListener('click', deleteCard);
     el.querySelector('.element__like-btn').addEventListener('click', likeCard);
-  }
+  };
+
+  popupImageOpenCloseButton.addEventListener('click', function() {
+    closePopup(popupImageOpen);
+  });
 
   function deleteCard (event) {
     event.target.closest('.element').remove();
@@ -132,4 +146,3 @@ popupAddCardCloseButton.addEventListener('click', function() {
 
 formElement.addEventListener('submit', formSubmitHandlerProfileEdit); 
 formAddElement.addEventListener('submit', formSubmitHandlerAddCard);
-
