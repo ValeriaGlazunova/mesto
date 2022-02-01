@@ -6,7 +6,6 @@ const popupEditCloseButton = document.querySelector(".popup__close-button");
 const popupAddCardCloseButton = document.querySelector(".popup__close-button_type_add-card");
 const popupImageOpenCloseButton = document.querySelector(".popup__close-button_type_img-open");
 const profileAddButton = document.querySelector(".profile__add-button");
-const popupSaveCardButton = document.querySelector(".popup__save-button_type_add-card");
 
 let formElement = document.querySelector(".popup__form_type_edit-profile");
 let formAddElement = document.querySelector(".popup__form_type_add-card");
