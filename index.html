@@ -38,9 +38,7 @@
             type="button"
           ></button>
         </section>
-        <section class="elements">
-          
-        </section>
+        <section class="elements"></section>
       </main>
 
       <footer class="footer">
@@ -51,7 +49,10 @@
         <div class="popup__container popup__container_type_edit-profile">
           <button class="popup__close-button" type="button"></button>
           <h3 class="popup__heading">Редактировать профиль</h3>
-          <form class="popup__form popup__form_type_edit-profile" name="profile-info">
+          <form
+            class="popup__form popup__form_type_edit-profile"
+            name="profile-info"
+          >
             <input
               class="popup__input popup__input_type_name"
               type="text"
@@ -70,7 +71,10 @@
 
       <div class="popup popup_type_add-card">
         <div class="popup__container popup__container_type_add-card">
-          <button class="popup__close-button popup__close-button_type_add-card" type="button"></button>
+          <button
+            class="popup__close-button popup__close-button_type_add-card"
+            type="button"
+          ></button>
           <h3 class="popup__heading">Новое место</h3>
           <form class="popup__form popup__form_type_add-card" name="add-card">
             <input
@@ -85,7 +89,12 @@
               placeholder="Ссылка на картинку"
               required
             />
-            <button class="popup__save-button popup__save-button_type_add-card" type="submit">Создать</button>
+            <button
+              class="popup__save-button popup__save-button_type_add-card"
+              type="submit"
+            >
+              Создать
+            </button>
           </form>
         </div>
       </div>
@@ -93,7 +102,10 @@
 
     <div class="popup popup_type_img-open">
       <div class="popup__box">
-        <button class="popup__close-button popup__close-button_type_img-open" type="button"></button>
+        <button
+          class="popup__close-button popup__close-button_type_img-open"
+          type="button"
+        ></button>
         <img class="popup__image" alt="картинка" src="" />
         <h3 class="popup__subtitle"></h3>
       </div>
@@ -101,12 +113,12 @@
 
     <template id="template">
       <div class="element">
-        <button class="element__trash-btn" aria-label="удалить" type="button"></button>
-        <img
-          class="element__image"
-          alt="карточка"
-          src=""
-       />
+        <button
+          class="element__trash-btn"
+          aria-label="удалить"
+          type="button"
+        ></button>
+        <img class="element__image" alt="карточка" src="" />
         <div class="element__description">
           <h2 class="element__title">название</h2>
           <button
