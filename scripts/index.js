@@ -7,17 +7,17 @@ const popupAddCardCloseButton = document.querySelector(".popup__close-button_typ
 const popupImageOpenCloseButton = document.querySelector(".popup__close-button_type_img-open");
 const profileAddButton = document.querySelector(".profile__add-button");
 
-let formElement = document.querySelector(".popup__form_type_edit-profile");
-let formAddElement = document.querySelector(".popup__form_type_add-card");
-let nameInput = document.querySelector(".popup__input_type_name");
-let jobInput = document.querySelector(".popup__input_type_description");
-let cardNameInput = document.querySelector(".popup__input_type_card-name");
-let cardLinkInput = document.querySelector(".popup__input_type_card-link");
-let imagePopup = document.querySelector(".popup__image");
-let subtitlePopup = document.querySelector(".popup__subtitle");
+const formElement = document.querySelector(".popup__form_type_edit-profile");
+const formAddElement = document.querySelector(".popup__form_type_add-card");
+const nameInput = document.querySelector(".popup__input_type_name");
+const jobInput = document.querySelector(".popup__input_type_description");
+const cardNameInput = document.querySelector(".popup__input_type_card-name");
+const cardLinkInput = document.querySelector(".popup__input_type_card-link");
+const imagePopup = document.querySelector(".popup__image");
+const subtitlePopup = document.querySelector(".popup__subtitle");
 
-let profileName = document.querySelector(".profile__name");
-let profileDescription = document.querySelector(".profile__description");
+const profileName = document.querySelector(".profile__name");
+const profileDescription = document.querySelector(".profile__description");
 
 const userTemplate = document.querySelector("#template").content;
 const elements = document.querySelector(".elements");
@@ -62,12 +62,13 @@ function renderCard(name, link) {
 
   newCard.querySelector(".element__image").src = link;
   newCard.querySelector(".element__image").alt = name;
-  newCard.querySelector(".element__title").innerText = name;
+  newCard.querySelector(".element__title").textContent = name;
 
   newCard.querySelector(".element__image").addEventListener("click", () => {
     imagePopup.src = link;
+    imagePopup.alt = name;
     subtitlePopup.textContent = name;
-    popupImageOpen.classList.add("popup_opened");
+    openPopup(popupImageOpen);
   });
 
   addListeners(newCard);
