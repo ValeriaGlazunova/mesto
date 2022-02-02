@@ -51,9 +51,7 @@ const initialCards = [
 
 //добавление массива карточек на страницу
 initialCards.forEach((item) => {
-  let card = renderCard(item.name, item.link);
-
-  elements.appendChild(card);
+  elements.appendChild(renderCard(item.name, item.link));
 });
 
 //создание карточки
@@ -105,8 +103,7 @@ function formSubmitHandlerProfileEdit(evt) {
 
 function formSubmitHandlerAddCard(evt) {
   evt.preventDefault();
-  let card = renderCard(cardNameInput.value, cardLinkInput.value);
-  addCard(card);
+  addCard(renderCard(cardNameInput.value, cardLinkInput.value));
   closePopup(popupAddCard);
 }
 
@@ -135,12 +132,6 @@ profileAddButton.addEventListener("click", function () {
 popupAddCardCloseButton.addEventListener("click", function () {
   closePopup(popupAddCard);
 });
-//ниже добавлен код для закрытия popup при нажатии мимо поля popup
-//popup.addEventListener('click', function(event) {
-// if(event.target === event.currentTarget) {
-//  closePopup();
-// }
-//});
 
 formElement.addEventListener("submit", formSubmitHandlerProfileEdit);
 formAddElement.addEventListener("submit", formSubmitHandlerAddCard);
