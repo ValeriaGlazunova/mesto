@@ -135,3 +135,21 @@ popupAddCardCloseButton.addEventListener("click", function () {
 
 formElement.addEventListener("submit", formSubmitHandlerProfileEdit);
 formAddElement.addEventListener("submit", formSubmitHandlerAddCard);
+
+popupEditProfile.addEventListener('click', function(event) {
+    if(event.target === event.currentTarget) {
+      closePopup(popupEditProfile);
+    }
+});
+
+popupAddCard.addEventListener('click', function(event) {
+  if(event.target === event.currentTarget) {
+    closePopup(popupAddCard);
+  }
+});
+
+popupImageOpen.addEventListener('click', function(event) {
+  if(event.target === event.currentTarget) {
+    closePopup(popupImageOpen);
+  }
+});
