@@ -153,3 +153,11 @@ popupImageOpen.addEventListener('click', function(event) {
     closePopup(popupImageOpen);
   }
 });
+
+document.addEventListener('keydown', function(evt) {
+    if(evt.key === 'Escape' ) {
+      closePopup(popupEditProfile);
+      closePopup(popupAddCard);
+      closePopup(popupImageOpen);
+    }
+});
