@@ -1,9 +1,0 @@
-.popup__input_type_card-link {
-    margin: 0 0 48px;
-}
-
-@media screen and (max-width: 600px) {
-    .popup__input_type_card-link {
-        margin: 0 0 45px;
-    }
-}

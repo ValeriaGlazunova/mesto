@@ -54,7 +54,8 @@
             name="profile-info"
             novalidate
           >
-            <input
+          <div class="popup__input-container"> 
+          <input
               id="name-input"
               class="popup__input popup__input_type_name"
               type="text"
@@ -63,7 +64,9 @@
               maxlength="40"
               required
             />
-            <span class="name-input-error popup__input-error">Необходимо заполнить данное поле</span> 
+            <span id="name-input-error" class="popup__input-error popup__input-error_visible"></span> 
+          </div> 
+          <div class="popup__input-container"> 
             <input
               id="job-input"
               class="popup__input popup__input_type_description"
@@ -73,7 +76,8 @@
               maxlength="200"
               required
             />
-            <span class="job-input-error popup__input-error">Необходимо заполнить данное поле</span> 
+            <span id="job-input-error" class="popup__input-error popup__input-error_visible"></span>
+          </div>  
             <button class="popup__save-button" type="submit">Сохранить</button>
           </form>
         </div>
@@ -87,6 +91,7 @@
           ></button>
           <h3 class="popup__heading">Новое место</h3>
           <form class="popup__form popup__form_type_add-card" name="add-card" novalidate>
+            <div class="popup__input-container"> 
             <input
               id="card-name-input"
               class="popup__input popup__input_type_card-name"
@@ -94,7 +99,9 @@
               placeholder="Название"
               required
             />
-            <span class="card-name-input-error popup__input-error">Необходимо заполнить данное поле</span> 
+            <span id="card-name-input-error" class="popup__input-error popup__input-error_visible"></span> 
+            </div>
+            <div class="popup__input-container"> 
             <input
               id="card-url-input"
               class="popup__input popup__input_type_card-link"
@@ -102,7 +109,8 @@
               placeholder="Ссылка на картинку"
               required
             />
-            <span class="card-url-input-error popup__input-error">Необходимо заполнить данное поле</span> 
+            <span id="card-url-input-error" class="popup__input-error popup__input-error_visible"></span> 
+            </div>
             <button
               class="popup__save-button popup__save-button_type_add-card"
               type="submit"
