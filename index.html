@@ -54,30 +54,36 @@
             name="profile-info"
             novalidate
           >
-          <div class="popup__input-container"> 
-          <input
-              id="name-input"
-              class="popup__input popup__input_type_name"
-              type="text"
-              placeholder="Имя"
-              minlength="2"
-              maxlength="40"
-              required
-            />
-            <span id="name-input-error" class="popup__input-error popup__input-error_visible"></span> 
-          </div> 
-          <div class="popup__input-container"> 
-            <input
-              id="job-input"
-              class="popup__input popup__input_type_description"
-              type="text"
-              placeholder="Деятельность"
-              minlength="2"
-              maxlength="200"
-              required
-            />
-            <span id="job-input-error" class="popup__input-error popup__input-error_visible"></span>
-          </div>  
+            <div class="popup__input-container">
+              <input
+                id="name-input"
+                class="popup__input popup__input_type_name"
+                type="text"
+                placeholder="Имя"
+                minlength="2"
+                maxlength="40"
+                required
+              />
+              <span
+                id="name-input-error"
+                class="popup__input-error popup__input-error_visible"
+              ></span>
+            </div>
+            <div class="popup__input-container">
+              <input
+                id="job-input"
+                class="popup__input popup__input_type_description"
+                type="text"
+                placeholder="Деятельность"
+                minlength="2"
+                maxlength="200"
+                required
+              />
+              <span
+                id="job-input-error"
+                class="popup__input-error popup__input-error_visible"
+              ></span>
+            </div>
             <button class="popup__save-button" type="submit">Сохранить</button>
           </form>
         </div>
@@ -90,28 +96,38 @@
             type="button"
           ></button>
           <h3 class="popup__heading">Новое место</h3>
-          <form class="popup__form popup__form_type_add-card" name="add-card" novalidate>
-            <div class="popup__input-container"> 
-            <input
-              id="card-name-input"
-              class="popup__input popup__input_type_card-name"
-              type="text"
-              placeholder="Название"
-              minlength="2"
-              maxlength="30"
-              required
-            />
-            <span id="card-name-input-error" class="popup__input-error popup__input-error_visible"></span> 
+          <form
+            class="popup__form popup__form_type_add-card"
+            name="add-card"
+            novalidate
+          >
+            <div class="popup__input-container">
+              <input
+                id="card-name-input"
+                class="popup__input popup__input_type_card-name"
+                type="text"
+                placeholder="Название"
+                minlength="2"
+                maxlength="30"
+                required
+              />
+              <span
+                id="card-name-input-error"
+                class="popup__input-error popup__input-error_visible"
+              ></span>
             </div>
-            <div class="popup__input-container"> 
-            <input
-              id="card-url-input"
-              class="popup__input popup__input_type_card-link"
-              type="url"
-              placeholder="Ссылка на картинку"
-              required
-            />
-            <span id="card-url-input-error" class="popup__input-error popup__input-error_visible"></span> 
+            <div class="popup__input-container">
+              <input
+                id="card-url-input"
+                class="popup__input popup__input_type_card-link"
+                type="url"
+                placeholder="Ссылка на картинку"
+                required
+              />
+              <span
+                id="card-url-input-error"
+                class="popup__input-error popup__input-error_visible"
+              ></span>
             </div>
             <button
               class="popup__save-button popup__save-button_type_add-card"

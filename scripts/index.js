@@ -7,7 +7,7 @@ const popupAddCardCloseButton = document.querySelector(".popup__close-button_typ
 const popupImageOpenCloseButton = document.querySelector(".popup__close-button_type_img-open");
 const profileAddButton = document.querySelector(".profile__add-button");
 
-const formElement = document.querySelector(".popup__form_type_edit-profile");
+const formEditElement = document.querySelector(".popup__form_type_edit-profile");
 const formAddElement = document.querySelector(".popup__form_type_add-card");
 const nameInput = document.querySelector(".popup__input_type_name");
 const jobInput = document.querySelector(".popup__input_type_description");
@@ -133,31 +133,31 @@ popupAddCardCloseButton.addEventListener("click", function () {
   closePopup(popupAddCard);
 });
 
-formElement.addEventListener("submit", formSubmitHandlerProfileEdit);
+formEditElement.addEventListener("submit", formSubmitHandlerProfileEdit);
 formAddElement.addEventListener("submit", formSubmitHandlerAddCard);
 
-popupEditProfile.addEventListener('click', function(event) {
-    if(event.target === event.currentTarget) {
-      closePopup(popupEditProfile);
-    }
+popupEditProfile.addEventListener("click", function (event) {
+  if (event.target === event.currentTarget) {
+    closePopup(popupEditProfile);
+  }
 });
 
-popupAddCard.addEventListener('click', function(event) {
-  if(event.target === event.currentTarget) {
+popupAddCard.addEventListener("click", function (event) {
+  if (event.target === event.currentTarget) {
     closePopup(popupAddCard);
   }
 });
 
-popupImageOpen.addEventListener('click', function(event) {
-  if(event.target === event.currentTarget) {
+popupImageOpen.addEventListener("click", function (event) {
+  if (event.target === event.currentTarget) {
     closePopup(popupImageOpen);
   }
 });
 
-document.addEventListener('keydown', function(evt) {
-    if(evt.key === 'Escape' ) {
-      closePopup(popupEditProfile);
-      closePopup(popupAddCard);
-      closePopup(popupImageOpen);
-    }
+document.addEventListener("keydown", function (evt) {
+  if (evt.key === "Escape") {
+    closePopup(popupEditProfile);
+    closePopup(popupAddCard);
+    closePopup(popupImageOpen);
+  }
 });
