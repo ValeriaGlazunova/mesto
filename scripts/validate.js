@@ -1,3 +1,12 @@
+const validationConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__save-button",
+  inactiveButtonClass: "popup__save-button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__input-error_visible",
+};
+
 //функция отображения стиля неверного инпута
 const showInputError = (
   { inputErrorClass, errorClass },
@@ -72,6 +81,7 @@ const setEventListeners = (
   });
 };
 
+
 const enableValidation = ({ formSelector, ...rest }) => {
   const formList = Array.from(document.querySelectorAll(formSelector));
   formList.forEach((formElement) => {
@@ -84,11 +94,4 @@ const enableValidation = ({ formSelector, ...rest }) => {
   });
 };
 
-enableValidation({
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__save-button",
-  inactiveButtonClass: "popup__save-button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__input-error_visible",
-});
+enableValidation(validationConfig);
