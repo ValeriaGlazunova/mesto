@@ -50,14 +50,14 @@ const isButtonValid = ({inactiveButtonClass}, form, button) => {
 //функция проверки валидности формы
 function enableValidation ({formSelector, inputSelector, submitButtonSelector, ...rest}) {
   const form = document.querySelector(formSelector);
-    form.addEventListener('submit', sumbitValidForm);
+  form.addEventListener('submit', sumbitValidForm);
 
-  const formInputs = form.querySelectorAll(inputSelector);
+  const inputList = form.querySelectorAll(inputSelector);
   const button = form.querySelector(submitButtonSelector);
 
   isButtonValid(rest, form, button);
 
-  formInputs.forEach(input => {
+  inputList.forEach(input => {
     input.addEventListener('input', () => {
       isInputValid(rest, form, input);
       isButtonValid(rest, form, button);
