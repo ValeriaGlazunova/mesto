@@ -15,7 +15,8 @@ const cardNameInput = document.querySelector(".popup__input_type_card-name");
 const cardLinkInput = document.querySelector(".popup__input_type_card-link");
 const imagePopup = document.querySelector(".popup__image");
 const subtitlePopup = document.querySelector(".popup__subtitle");
-const saveButton = formEditElement.querySelector('.popup__save-button');
+const editProfileSaveButton = formEditElement.querySelector('.popup__save-button');
+const addCardSaveButton = formAddElement.querySelector('.popup__save-button');
 const editProfileInputList = Array.from(formEditElement.querySelectorAll('.popup__input'));
 
 const profileName = document.querySelector(".profile__name");
@@ -60,7 +61,7 @@ function likeCard(event) {
     .classList.toggle("element__like-btn_active");
 }
 
-function openPopup(popupElement, validationConfig) {
+const openPopup = (popupElement) => {
   popupElement.classList.add("popup_opened");
   document.addEventListener('keydown', closePopupEscape); 
 }
@@ -82,13 +83,18 @@ function handleProfileEditFormSubmit(evt) {
   profileName.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
   closePopup(popupEditProfile);
-  
+  formEditElement.reset();
+  //editProfileSaveButton.classList.add('popup__save-button_disabled');
+  //editProfileSaveButton.setAttribute("disabled", "");
 }
 
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
   addCard(renderCard(cardNameInput.value, cardLinkInput.value));
   closePopup(popupAddCard);
+  formAddElement.reset();
+ // addCardSaveButton.classList.add('popup__save-button_disabled');
+ // addCardSaveButton.setAttribute("disabled", "");
 }
 
 function addCard(card) {
@@ -104,16 +110,19 @@ popupImageOpenCloseButton.addEventListener("click", function () {
   closePopup(popupImageOpen);
 });
 
-profileEditOpenPopupButton.addEventListener("click", function () {
+profileEditOpenPopupButton.addEventListener("click", (validationConfig) => {
   openPopup(popupEditProfile);
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
+  resetValidation(editProfileInputList, editProfileSaveButton, formEditElement, validationConfig);
 });
+
 popupEditCloseButton.addEventListener("click", function () {
   closePopup(popupEditProfile);
 });
 profileAddButton.addEventListener("click", function () {
   openPopup(popupAddCard);
+
 });
 popupAddCardCloseButton.addEventListener("click", function () {
   closePopup(popupAddCard);

@@ -81,13 +81,19 @@ const setEventListeners = (
   });
 };
 
+function resetValidation(inputList, buttonElement, formElement, validationConfig) { 
+  toggleButtonState(inputList, buttonElement, validationConfig); 
+  
+  inputList.forEach((inputElement) => { 
+    hideInputError(formElement, inputElement, validationConfig); 
+  }); 
+} 
 
 const enableValidation = ({ formSelector, ...rest }) => {
   const formList = Array.from(document.querySelectorAll(formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      formElement.reset();
     });
 
     setEventListeners(rest, formElement);
