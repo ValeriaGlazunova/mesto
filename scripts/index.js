@@ -18,6 +18,7 @@ const subtitlePopup = document.querySelector(".popup__subtitle");
 const editProfileSaveButton = formEditElement.querySelector('.popup__save-button');
 const addCardSaveButton = formAddElement.querySelector('.popup__save-button');
 const editProfileInputList = Array.from(formEditElement.querySelectorAll('.popup__input'));
+const addCardInputList = Array.from(formAddElement.querySelectorAll('.popup__input'));
 
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
@@ -84,8 +85,6 @@ function handleProfileEditFormSubmit(evt) {
   profileDescription.textContent = jobInput.value;
   closePopup(popupEditProfile);
   formEditElement.reset();
-  //editProfileSaveButton.classList.add('popup__save-button_disabled');
-  //editProfileSaveButton.setAttribute("disabled", "");
 }
 
 function handleAddCardFormSubmit(evt) {
@@ -93,8 +92,6 @@ function handleAddCardFormSubmit(evt) {
   addCard(renderCard(cardNameInput.value, cardLinkInput.value));
   closePopup(popupAddCard);
   formAddElement.reset();
- // addCardSaveButton.classList.add('popup__save-button_disabled');
- // addCardSaveButton.setAttribute("disabled", "");
 }
 
 function addCard(card) {
@@ -110,7 +107,7 @@ popupImageOpenCloseButton.addEventListener("click", function () {
   closePopup(popupImageOpen);
 });
 
-profileEditOpenPopupButton.addEventListener("click", (validationConfig) => {
+profileEditOpenPopupButton.addEventListener("click", () => {
   openPopup(popupEditProfile);
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
@@ -120,9 +117,9 @@ profileEditOpenPopupButton.addEventListener("click", (validationConfig) => {
 popupEditCloseButton.addEventListener("click", function () {
   closePopup(popupEditProfile);
 });
-profileAddButton.addEventListener("click", function () {
+profileAddButton.addEventListener("click", () => {
   openPopup(popupAddCard);
-
+  resetValidation(addCardInputList, addCardSaveButton, formAddElement, validationConfig);
 });
 popupAddCardCloseButton.addEventListener("click", function () {
   closePopup(popupAddCard);

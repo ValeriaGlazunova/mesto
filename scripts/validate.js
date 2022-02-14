@@ -81,13 +81,13 @@ const setEventListeners = (
   });
 };
 
-function resetValidation(inputList, buttonElement, formElement, validationConfig) { 
-  toggleButtonState(inputList, buttonElement, validationConfig); 
+function resetValidation(inputList, buttonElement, formElement, {...rest}) { 
+  toggleButtonState(rest, inputList, buttonElement); 
   
   inputList.forEach((inputElement) => { 
-    hideInputError(formElement, inputElement, validationConfig); 
+    hideInputError(rest, formElement, inputElement); 
   }); 
-} 
+};
 
 const enableValidation = ({ formSelector, ...rest }) => {
   const formList = Array.from(document.querySelectorAll(formSelector));
