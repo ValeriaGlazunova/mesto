@@ -1,3 +1,5 @@
+import { FormValidator } from './FormValidator.js'
+
 const profileEditOpenPopupButton = document.querySelector(".profile__edit-button");
 const popupEditProfile = document.querySelector(".popup_type_edit-profile");
 const popupAddCard = document.querySelector(".popup_type_add-card");
@@ -25,6 +27,22 @@ const profileDescription = document.querySelector(".profile__description");
 
 const userTemplate = document.querySelector("#template").content;
 const elements = document.querySelector(".elements");
+
+const validationConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__save-button",
+  inactiveButtonClass: "popup__save-button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__input-error_visible",
+};
+
+
+const editProfileValidate = new FormValidator(validationConfig, formEditElement);
+const addCardValidate = new FormValidator(validationConfig, formAddElement);
+
+editProfileValidate.enableValidation();
+addCardValidate.enableValidation();
 
 //добавление массива карточек на страницу
 initialCards.forEach((item) => {
@@ -111,7 +129,7 @@ profileEditOpenPopupButton.addEventListener("click", () => {
   openPopup(popupEditProfile);
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
-  resetValidation(editProfileInputList, editProfileSaveButton, formEditElement, validationConfig);
+  editProfileValidate.resetValidation(editProfileInputList, editProfileSaveButton);
 });
 
 popupEditCloseButton.addEventListener("click", function () {
@@ -119,7 +137,7 @@ popupEditCloseButton.addEventListener("click", function () {
 });
 profileAddButton.addEventListener("click", () => {
   openPopup(popupAddCard);
-  resetValidation(addCardInputList, addCardSaveButton, formAddElement, validationConfig);
+  addCardValidate.resetValidation(addCardInputList, addCardSaveButton);
 });
 popupAddCardCloseButton.addEventListener("click", function () {
   closePopup(popupAddCard);
