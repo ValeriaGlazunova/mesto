@@ -1,6 +1,6 @@
-import { FormValidator } from './FormValidator.js';
-import { popupImageOpen, openPopup, closePopup } from './utils.js';
-import { Card } from './Card.js';
+import { FormValidator } from "./FormValidator.js";
+import { popupImageOpen, openPopup, closePopup } from "./utils.js";
+import { Card } from "./Card.js";
 
 const profileEditOpenPopupButton = document.querySelector(".profile__edit-button");
 const popupEditProfile = document.querySelector(".popup_type_edit-profile");
@@ -16,10 +16,10 @@ const nameInput = document.querySelector(".popup__input_type_name");
 const jobInput = document.querySelector(".popup__input_type_description");
 const cardNameInput = document.querySelector(".popup__input_type_card-name");
 const cardLinkInput = document.querySelector(".popup__input_type_card-link");
-const editProfileSaveButton = formEditElement.querySelector('.popup__save-button');
-const addCardSaveButton = formAddElement.querySelector('.popup__save-button');
-const editProfileInputList = Array.from(formEditElement.querySelectorAll('.popup__input'));
-const addCardInputList = Array.from(formAddElement.querySelectorAll('.popup__input'));
+const editProfileSaveButton = formEditElement.querySelector(".popup__save-button");
+const addCardSaveButton = formAddElement.querySelector(".popup__save-button");
+const editProfileInputList = Array.from(formEditElement.querySelectorAll(".popup__input"));
+const addCardInputList = Array.from(formAddElement.querySelectorAll(".popup__input"));
 
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
@@ -43,10 +43,10 @@ addCardValidate.enableValidation();
 
 //добавление массива карточек на страницу
 initialCards.forEach((data) => {
-  const card = new Card(data, '#template');
+  const card = new Card(data, "#template");
   const cardElement = card.renderCard();
   elements.append(cardElement);
-})
+});
 
 function handleProfileEditFormSubmit(evt) {
   evt.preventDefault();
@@ -64,7 +64,7 @@ function handleAddCardFormSubmit(evt) {
 }
 
 function addCard(data) {
-  const card = new Card(data, '#template');
+  const card = new Card(data, "#template");
   const cardElement = card.renderCard();
   elements.prepend(cardElement);
 }
@@ -77,7 +77,10 @@ profileEditOpenPopupButton.addEventListener("click", () => {
   openPopup(popupEditProfile);
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
-  editProfileValidate.resetValidation(editProfileInputList, editProfileSaveButton);
+  editProfileValidate.resetValidation(
+    editProfileInputList,
+    editProfileSaveButton
+  );
 });
 
 popupEditCloseButton.addEventListener("click", function () {
@@ -111,5 +114,3 @@ popupImageOpen.addEventListener("mousedown", function (event) {
     closePopup(popupImageOpen);
   }
 });
-
-
