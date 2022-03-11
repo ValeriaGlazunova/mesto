@@ -8,8 +8,8 @@ export const openPopup = (popupElement) => {
   }
 
   function closePopupEscape (evt) {
-    const openedPopup = document.querySelector('.popup_opened');
     if (evt.key === "Escape") {
+      const openedPopup = document.querySelector('.popup_opened');
       closePopup(openedPopup);
   }
   }

@@ -1,17 +1,12 @@
-import {
-  imagePopup,
-  subtitlePopup,
-  openPopup,
-  popupImageOpen,
-} from "./utils.js";
 
 export class Card {
-  constructor(data, cardTemplate) {
+  constructor(data, cardTemplate, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._userTemplate = document
       .querySelector(cardTemplate)
       .content.querySelector(".element");
+    this._handleCardClick = handleCardClick;
   }
 
   _deleteCard = (event) => {
@@ -24,34 +19,30 @@ export class Card {
       .classList.toggle("element__like-btn_active");
   };
 
-  _addListeners(el) {
-    el.querySelector(".element__trash-btn").addEventListener(
+  _addListeners() {
+    this._cardElement.querySelector(".element__trash-btn").addEventListener(
       "click",
       this._deleteCard
     );
-    el.querySelector(".element__like-btn").addEventListener(
+    this._cardElement.querySelector(".element__like-btn").addEventListener(
       "click",
       this._likeCard
     );
+    this._cardImage.addEventListener("click", () => {
+      this._handleCardClick(this._name, this._link);
+    });
   }
 
   renderCard() {
-    const newCard = this._userTemplate.cloneNode(true);
-    const newCardImageElement = newCard.querySelector(".element__image");
+    this._cardElement = this._userTemplate.cloneNode(true);
+    this._cardImage = this._cardElement.querySelector(".element__image");
 
-    newCardImageElement.src = this._link;
-    newCardImageElement.alt = this._name;
-    newCard.querySelector(".element__title").textContent = this._name;
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
+    this._cardElement.querySelector(".element__title").textContent = this._name;
 
-    newCardImageElement.addEventListener("click", () => {
-      imagePopup.src = this._link;
-      imagePopup.alt = this._name;
-      subtitlePopup.textContent = this._name;
-      openPopup(popupImageOpen);
-    });
+    this._addListeners();
 
-    this._addListeners(newCard);
-
-    return newCard;
+    return this._cardElement;
   }
 }
