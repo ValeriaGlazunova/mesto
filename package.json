@@ -1,0 +1,19 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "Одностраничный сайт - личная страница. Содержит фотографии пользователя с описанием. Сайт выполнен с применением технологий: струатура БЭМ Nested, флексбокс-верстка, grid-layout, javascripf, формы? ООП.\r На сайте с помощью JavaScript  реализовано: отображение, добавление и удаление карточек на странице. Есть возможность поставить и убрать лайк у карточки. Стоят слушатели на события клавиатуры: добавление данных из форм в карточки и закрытие попапов на Esc. Формы валидируются через JS, кнопка отправления формы не активна, пока данные в полях не проходят валидацию. Созданы классы валидации и карточки, добавлены в общий файл index.js через директивы export и import.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ValeriaGlazunova/mesto.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ValeriaGlazunova/mesto/issues"
+  },
+  "homepage": "https://github.com/ValeriaGlazunova/mesto#readme"
+}
