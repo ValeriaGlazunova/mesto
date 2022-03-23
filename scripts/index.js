@@ -2,6 +2,7 @@ import { FormValidator } from "./FormValidator.js";
 import { imagePopup, subtitlePopup, popupImageOpen, openPopup, closePopup } from "./utils.js";
 import { Card } from "./Card.js";
 import { initialCards } from "./initial-cards.js";
+import { Section } from "./Section.js";
 
 const profileEditOpenPopupButton = document.querySelector(".profile__edit-button");
 const popupEditProfile = document.querySelector(".popup_type_edit-profile");
@@ -47,9 +48,9 @@ function createCard(item) {
 
 //добавление массива карточек на страницу
 initialCards.forEach((data) => {
-  const cardElement = createCard(data);
-  elements.append(cardElement);
+  addCard(data, false)
 });
+
 
 function handleProfileEditFormSubmit(evt) {
   evt.preventDefault();
@@ -61,7 +62,7 @@ function handleProfileEditFormSubmit(evt) {
 
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
-  addCard({name: cardNameInput.value, link: cardLinkInput.value});
+  addCard({name: cardNameInput.value, link: cardLinkInput.value}, true);
   closePopup(popupAddCard);
   formAddElement.reset();
 }
@@ -73,9 +74,13 @@ function handleCardClick(name, link) {
       openPopup(popupImageOpen);
 }
 
-function addCard(data) {
+function addCard(data, isPrepend) {
   const cardElement = createCard(data);
-  elements.prepend(cardElement);
+  if (isPrepend) {
+    elements.prepend(cardElement);
+  } else {
+    elements.append(cardElement)
+  }
 }
 
 popupImageOpenCloseButton.addEventListener("click", function () {
