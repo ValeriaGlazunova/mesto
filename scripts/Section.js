@@ -1,20 +1,22 @@
+
+
 export class Section {
-    constructor( {items, renderer}, containerSelector) {
-        this._renderedItems = items;
+    constructor( {renderer}, containerSelector) {
+        
         this._renderer = renderer;
         this._container = document.querySelector(containerSelector);
     }
-    renderItems() {
-        this._renderedItems.forEach((item) => {
-            this.renderer(item);
+    renderItems({items}) {
+      this._initialArray = items;
+        this._initialArray.forEach((item) => {
+            this._renderer(item);
         });
     };
-    addItem(data, isPrepend) {
-        const cardElement = createCard(data);
+    addItem(element, isPrepend) {
         if (isPrepend) {
-          elements.prepend(cardElement);
+          this._container.prepend(element);
         } else {
-          elements.append(cardElement)
+          this._container.append(element)
         }
       }
 }

@@ -40,16 +40,25 @@ const addCardValidate = new FormValidator(validationConfig, formAddElement);
 editProfileValidate.enableValidation();
 addCardValidate.enableValidation();
 
-function createCard(item) {
+const createCard = item => {
   const card = new Card(item, '#template', handleCardClick);
   const cardElement = card.renderCard();
   return cardElement;
 }
 
+const cardList = new Section ({
+
+  renderer: (item) => {
+    cardList.addItem(createCard(item), false);
+  }
+}, '.elements');
+
+cardList.renderItems({items: initialCards});
+
 //добавление массива карточек на страницу
-initialCards.forEach((data) => {
-  addCard(data, false)
-});
+//initialCards.forEach((data) => {
+// addCard(data, false)
+//});
 
 
 function handleProfileEditFormSubmit(evt) {
@@ -62,7 +71,9 @@ function handleProfileEditFormSubmit(evt) {
 
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
-  addCard({name: cardNameInput.value, link: cardLinkInput.value}, true);
+  const newCardItem = {name: cardNameInput.value, link: cardLinkInput.value};
+  cardList.addItem(createCard(newCardItem), true)
+  //addCard({name: cardNameInput.value, link: cardLinkInput.value}, true);
   closePopup(popupAddCard);
   formAddElement.reset();
 }
