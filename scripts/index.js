@@ -1,15 +1,13 @@
 import { FormValidator } from "./FormValidator.js";
-import { imagePopup, subtitlePopup, popupImageOpen, openPopup, closePopup } from "./utils.js";
+import { imagePopup, subtitlePopup } from "./utils.js";
 import { Card } from "./Card.js";
 import { initialCards } from "./initial-cards.js";
 import { Section } from "./Section.js";
+import { Popup } from "./Popup.js";
 
 const profileEditOpenPopupButton = document.querySelector(".profile__edit-button");
-const popupEditProfile = document.querySelector(".popup_type_edit-profile");
-const popupAddCard = document.querySelector(".popup_type_add-card");
-const popupEditCloseButton = document.querySelector(".popup__close-button_type_edit-profile");
-const popupAddCardCloseButton = document.querySelector(".popup__close-button_type_add-card");
-const popupImageOpenCloseButton = document.querySelector(".popup__close-button_type_img-open");
+//const popupEditProfile = document.querySelector(".popup_type_edit-profile");
+//const popupAddCard = document.querySelector(".popup_type_add-card");
 const profileAddButton = document.querySelector(".profile__add-button");
 
 const formEditElement = document.querySelector(".popup__form_type_edit-profile");
@@ -23,7 +21,6 @@ const cardLinkInput = document.querySelector(".popup__input_type_card-link");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 
-const elements = document.querySelector(".elements");
 
 const validationConfig = {
   formSelector: ".popup__form",
@@ -60,79 +57,74 @@ cardList.renderItems({items: initialCards});
 // addCard(data, false)
 //});
 
+const popupEditProfile = new Popup(".popup_type_edit-profile");
 
 function handleProfileEditFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
-  closePopup(popupEditProfile);
+  popupEditProfile.close();
   formEditElement.reset();
 }
+
+const popupAddCard = new Popup('.popup_type_add-card');
 
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
   const newCardItem = {name: cardNameInput.value, link: cardLinkInput.value};
   cardList.addItem(createCard(newCardItem), true)
   //addCard({name: cardNameInput.value, link: cardLinkInput.value}, true);
-  closePopup(popupAddCard);
+  popupAddCard.close();
   formAddElement.reset();
 }
+
+const popupImageOpen = new Popup('.popup_type_img-open');
 
 function handleCardClick(name, link) {
       imagePopup.src = link;
       imagePopup.alt = name;
       subtitlePopup.textContent = name;
-      openPopup(popupImageOpen);
+      popupImageOpen.open();
 }
 
-function addCard(data, isPrepend) {
-  const cardElement = createCard(data);
-  if (isPrepend) {
-    elements.prepend(cardElement);
-  } else {
-    elements.append(cardElement)
-  }
-}
+//function addCard(data, isPrepend) {
+//  const cardElement = createCard(data);
+//  if (isPrepend) {
+ //   elements.prepend(cardElement);
+//  } else {
+ //   elements.append(cardElement)
+ // }
+//}
 
-popupImageOpenCloseButton.addEventListener("click", function () {
-  closePopup(popupImageOpen);
-});
+//const popups = document.querySelectorAll('.popup')
+
+//popups.forEach((popup) => {
+  //  popup.addEventListener('mousedown', (evt) => {
+  //      if (evt.target.classList.contains('popup_opened')) {
+   //         closePopup(popup)
+   //     }
+   //   if (evt.target.classList.contains('popup__close-button')) {
+   //       closePopup(popup)
+   //     }
+  //  })
+//})
+
 
 profileEditOpenPopupButton.addEventListener("click", () => {
-  openPopup(popupEditProfile);
+  popupEditProfile.open();
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
   editProfileValidate.resetValidation();
 });
 
-popupEditCloseButton.addEventListener("click", function () {
-  closePopup(popupEditProfile);
-});
+
 profileAddButton.addEventListener("click", () => {
-  openPopup(popupAddCard);
+  popupAddCard.open();
   addCardValidate.resetValidation();
 });
-popupAddCardCloseButton.addEventListener("click", function () {
-  closePopup(popupAddCard);
-});
+
 
 formEditElement.addEventListener("submit", handleProfileEditFormSubmit);
 formAddElement.addEventListener("submit", handleAddCardFormSubmit);
 
-popupEditProfile.addEventListener("mousedown", function (event) {
-  if (event.target === event.currentTarget) {
-    closePopup(popupEditProfile);
-  }
-});
 
-popupAddCard.addEventListener("mousedown", function (event) {
-  if (event.target === event.currentTarget) {
-    closePopup(popupAddCard);
-  }
-});
-
-popupImageOpen.addEventListener("mousedown", function (event) {
-  if (event.target === event.currentTarget) {
-    closePopup(popupImageOpen);
-  }
-});
