@@ -2,8 +2,10 @@ import { FormValidator } from "./FormValidator.js";
 import { Card } from "./Card.js";
 import { initialCards } from "./initial-cards.js";
 import { Section } from "./Section.js";
-import { Popup } from "./Popup.js";
+//import { Popup } from "./Popup.js";
 import { PopupWithImage } from "./PopupWithImage.js";
+import { PopupWithForm } from "./PopupWithForm.js";
+import { UserInfo } from "./UserInfo.js";
 
 const profileEditOpenPopupButton = document.querySelector(".profile__edit-button");
 //const popupEditProfile = document.querySelector(".popup_type_edit-profile");
@@ -31,11 +33,27 @@ const validationConfig = {
   errorClass: "popup__input-error_visible",
 };
 
-const editProfileValidate = new FormValidator(validationConfig, formEditElement);
-const addCardValidate = new FormValidator(validationConfig, formAddElement);
+//const editProfileValidate = new FormValidator(validationConfig, formEditElement);
+//const addCardValidate = new FormValidator(validationConfig, formAddElement);
 
-editProfileValidate.enableValidation();
-addCardValidate.enableValidation();
+//editProfileValidate.enableValidation();
+//addCardValidate.enableValidation();
+
+const formValidators = {}
+
+// Включение валидации
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement)
+// получаем данные из атрибута `name` у формы
+    const formName = formElement.getAttribute('name')
+    formValidators[formName] = validator;
+   validator.enableValidation();
+  });
+};
+
+enableValidation(validationConfig);
 
 const createCard = item => {
   const card = new Card(item, '#template', handleCardClick);
@@ -57,26 +75,46 @@ cardList.renderItems({items: initialCards});
 // addCard(data, false)
 //});
 
-const popupEditProfile = new Popup(".popup_type_edit-profile");
+const userInfo = new UserInfo({
+  nameSelector: '.profile__name',
+  jobSelector: ".profile__description"
+})
 
-function handleProfileEditFormSubmit(evt) {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileDescription.textContent = jobInput.value;
-  popupEditProfile.close();
-  formEditElement.reset();
+const popupEditProfile = new PopupWithForm(".popup_type_edit-profile", {
+submitFormCallback: (formInputInfo) => {
+  userInfo.setUserInfo(formInputInfo)
 }
+});
 
-const popupAddCard = new Popup('.popup_type_add-card');
+popupEditProfile.setEventListeners();
 
-function handleAddCardFormSubmit(evt) {
-  evt.preventDefault();
-  const newCardItem = {name: cardNameInput.value, link: cardLinkInput.value};
-  cardList.addItem(createCard(newCardItem), true)
-  //addCard({name: cardNameInput.value, link: cardLinkInput.value}, true);
-  popupAddCard.close();
-  formAddElement.reset();
-}
+//function handleProfileEditFormSubmit(evt) {
+//  evt.preventDefault();
+//  profileName.textContent = nameInput.value;
+ // profileDescription.textContent = jobInput.value;
+ // popupEditProfile.close();
+ // formEditElement.reset();
+//}
+
+const popupAddCard = new PopupWithForm('.popup_type_add-card', {
+  submitFormCallback: (formInputInfo) => {
+    const newCardItem = {name: formInputInfo['card-name-input'], link: formInputInfo['card-url-input']};
+    cardList.addItem(createCard(newCardItem), true);
+  }
+});
+
+popupAddCard.setEventListeners();
+
+
+
+//function handleAddCardFormSubmit(evt) {
+  //evt.preventDefault();
+  //const newCardItem = {name: cardNameInput.value, link: cardLinkInput.value};
+  //cardList.addItem(createCard(newCardItem), true)
+  ////addCard({name: cardNameInput.value, link: cardLinkInput.value}, true);
+  //popupAddCard.close();
+  //formAddElement.reset();
+//}
 
 const popupImageOpen = new PopupWithImage('.popup_type_img-open');
 
@@ -114,17 +152,17 @@ profileEditOpenPopupButton.addEventListener("click", () => {
   popupEditProfile.open();
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
-  editProfileValidate.resetValidation();
+  formValidators['profile-info'].resetValidation();
 });
 
 
 profileAddButton.addEventListener("click", () => {
   popupAddCard.open();
-  addCardValidate.resetValidation();
+  formValidators['add-card'].resetValidation();
 });
 
 
-formEditElement.addEventListener("submit", handleProfileEditFormSubmit);
-formAddElement.addEventListener("submit", handleAddCardFormSubmit);
+//formEditElement.addEventListener("submit", handleProfileEditFormSubmit);
+//formAddElement.addEventListener("submit", handleAddCardFormSubmit);
 
 
