@@ -1,9 +1,9 @@
 import { FormValidator } from "./FormValidator.js";
-import { imagePopup, subtitlePopup } from "./utils.js";
 import { Card } from "./Card.js";
 import { initialCards } from "./initial-cards.js";
 import { Section } from "./Section.js";
 import { Popup } from "./Popup.js";
+import { PopupWithImage } from "./PopupWithImage.js";
 
 const profileEditOpenPopupButton = document.querySelector(".profile__edit-button");
 //const popupEditProfile = document.querySelector(".popup_type_edit-profile");
@@ -78,13 +78,13 @@ function handleAddCardFormSubmit(evt) {
   formAddElement.reset();
 }
 
-const popupImageOpen = new Popup('.popup_type_img-open');
+const popupImageOpen = new PopupWithImage('.popup_type_img-open');
 
 function handleCardClick(name, link) {
-      imagePopup.src = link;
-      imagePopup.alt = name;
-      subtitlePopup.textContent = name;
-      popupImageOpen.open();
+      //imagePopup.src = link;
+      //imagePopup.alt = name;
+     // subtitlePopup.textContent = name;
+      popupImageOpen.open(name, link);
 }
 
 //function addCard(data, isPrepend) {

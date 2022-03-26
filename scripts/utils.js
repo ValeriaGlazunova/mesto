@@ -1,5 +1,5 @@
-export const imagePopup = document.querySelector(".popup__image");
-export const subtitlePopup = document.querySelector(".popup__subtitle");
+//export const imagePopup = document.querySelector(".popup__image");
+//export const subtitlePopup = document.querySelector(".popup__subtitle");
 //export const popupImageOpen = document.querySelector(".popup_type_img-open");
 
 //export const openPopup = (popupElement) => {
