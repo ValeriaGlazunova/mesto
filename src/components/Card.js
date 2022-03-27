@@ -1,4 +1,3 @@
-
 export class Card {
   constructor(data, cardTemplate, handleCardClick) {
     this._name = data.name;
@@ -20,14 +19,12 @@ export class Card {
   };
 
   _addListeners() {
-    this._cardElement.querySelector(".element__trash-btn").addEventListener(
-      "click",
-      this._deleteCard
-    );
-    this._cardElement.querySelector(".element__like-btn").addEventListener(
-      "click",
-      this._likeCard
-    );
+    this._cardElement
+      .querySelector(".element__trash-btn")
+      .addEventListener("click", this._deleteCard);
+    this._cardElement
+      .querySelector(".element__like-btn")
+      .addEventListener("click", this._likeCard);
     this._cardImage.addEventListener("click", () => {
       this._handleCardClick(this._name, this._link);
     });
