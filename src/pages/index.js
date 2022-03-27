@@ -7,6 +7,9 @@ import { PopupWithForm } from "../components/PopupWithForm.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { profileEditOpenPopupButton, profileAddButton, formEditElement, formAddElement, nameInput, jobInput, validationConfig } from '../utils/constants.js'
 
+import '../pages/index.css';
+
+
 //создание экземпляров классов валидации
 const editProfileValidate = new FormValidator(validationConfig, formEditElement);
 const addCardValidate = new FormValidator(validationConfig, formAddElement);
