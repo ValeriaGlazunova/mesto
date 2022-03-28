@@ -18,15 +18,15 @@ import {
 import "../pages/index.css";
 
 //создание экземпляров классов валидации
-const editProfileValidate = new FormValidator(
+const validationProfileEdit = new FormValidator(
   validationConfig,
   formEditElement
 );
-const addCardValidate = new FormValidator(validationConfig, formAddElement);
+const validationAddCard = new FormValidator(validationConfig, formAddElement);
 
 //запуск работы валидации
-editProfileValidate.enableValidation();
-addCardValidate.enableValidation();
+validationProfileEdit.enableValidation();
+validationAddCard.enableValidation();
 
 //создание экземпляра класса создания карточки
 const createCard = (data) => {
@@ -96,15 +96,15 @@ const userInfo = new UserInfo({
 
 //подписка на слушатель кнопки открытия попапа изменения профиля
 profileEditOpenPopupButton.addEventListener("click", () => {
-  popupEditProfile.open();
   const data = userInfo.getUserInfo();
   nameInput.value = data.name;
   jobInput.value = data.job;
-  editProfileValidate.resetValidation();
+  validationProfileEdit.resetValidation();
+  popupEditProfile.open();
 });
 
 //подписка на слушатель кнопки открытия попапа добавления карточки
 profileAddButton.addEventListener("click", () => {
+  validationAddCard.resetValidation();
   popupAddCard.open();
-  addCardValidate.resetValidation();
 });

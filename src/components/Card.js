@@ -8,13 +8,13 @@ export class Card {
     this._handleCardClick = handleCardClick;
   }
 
-  _deleteCard = (event) => {
-    event.target.closest(".element").remove();
+  _deleteCard = () => {
+    this._cardElement.remove();
+    this._cardElement = null;
   };
 
-  _likeCard = (event) => {
-    event.target
-      .closest(".element__like-btn")
+  _likeCard = () => {
+    this._likeButton
       .classList.toggle("element__like-btn_active");
   };
 
@@ -22,8 +22,7 @@ export class Card {
     this._cardElement
       .querySelector(".element__trash-btn")
       .addEventListener("click", this._deleteCard);
-    this._cardElement
-      .querySelector(".element__like-btn")
+      this._likeButton
       .addEventListener("click", this._likeCard);
     this._cardImage.addEventListener("click", () => {
       this._handleCardClick(this._name, this._link);
@@ -33,10 +32,13 @@ export class Card {
   renderCard() {
     this._cardElement = this._userTemplate.cloneNode(true);
     this._cardImage = this._cardElement.querySelector(".element__image");
+    
 
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._cardElement.querySelector(".element__title").textContent = this._name;
+
+    this._likeButton = this._cardElement.querySelector('.element__like-btn');
 
     this._addListeners();
 
