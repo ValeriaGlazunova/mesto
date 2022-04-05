@@ -14,6 +14,7 @@ import {
   jobInput,
   validationConfig,
 } from "../utils/constants.js";
+import { api } from '../components/Api.js'
 
 import "../pages/index.css";
 
