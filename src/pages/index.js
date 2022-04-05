@@ -1,6 +1,6 @@
 import { FormValidator } from "../components/FormValidator.js";
 import { Card } from "../components/Card.js";
-import { initialCards } from "../utils/initial-cards.js";
+//import { initialCards } from "../utils/initial-cards.js";
 import { Section } from "../components/Section.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
@@ -17,6 +17,23 @@ import {
 import { api } from '../components/Api.js'
 
 import "../pages/index.css";
+
+api.getProfile()
+.then(res => {
+  userInfo.setUserInfo(res.name, res.about)
+})
+
+api.getInitialCards()
+.then(list => {
+  list.forEach(data => {
+    const card = createCard({
+      name: data.name,
+      link: data.link,
+    })
+    cardList.addItem(card)
+  })
+})
+
 
 //создание экземпляров классов валидации
 const validationProfileEdit = new FormValidator(
@@ -47,7 +64,8 @@ const cardList = new Section(
 );
 
 //добавление первоначального списка карточек на страницу при загрузке
-cardList.renderItems({ items: initialCards });
+//cardList.renderItems({ items: initialCards });
+cardList.renderItems({ items: [] });
 
 //создание экземпляра класса попапа с картинкой
 const popupImageOpen = new PopupWithImage(".popup_type_img-open");
@@ -61,7 +79,11 @@ popupImageOpen.setEventListeners();
 //функция-колбэк внесения данных в профиль
 const handleProfileEditFormSubmit = (data) => {
   const { name, job } = data;
-  userInfo.setUserInfo(name, job);
+  api.editProfile(name, job)
+  .then(res => {
+    userInfo.setUserInfo(name, job)
+  })
+  
   popupEditProfile.close();
 };
 
