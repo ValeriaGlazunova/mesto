@@ -29,6 +29,7 @@ api.getInitialCards()
     const card = createCard({
       name: data.name,
       link: data.link,
+      likes: data.likes
     })
     cardList.addItem(card)
   })
@@ -80,7 +81,7 @@ popupImageOpen.setEventListeners();
 const handleProfileEditFormSubmit = (data) => {
   const { name, job } = data;
   api.editProfile(name, job)
-  .then(res => {
+  .then(() => {
     userInfo.setUserInfo(name, job)
   })
   
@@ -96,12 +97,18 @@ popupEditProfile.setEventListeners();
 
 //функция-колбэк создания карточки с данными пользователя
 const handleAddCardFormSubmit = (data) => {
+  
+api.postCard(data["card-name-input"], data['card-url-input'])
+.then(res => {
   const newCardItem = createCard({
     name: data["card-name-input"],
-    link: data["card-url-input"],
-  });
-  cardList.addItem(newCardItem, true);
+    link: data['card-url-input'],
+    likes: data.likes
+  })
+    cardList.addItem(newCardItem, true);
   popupAddCard.close();
+})
+
 };
 
 //создание экземпляра класса попапа создания карточки
