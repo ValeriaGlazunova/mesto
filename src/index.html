@@ -148,7 +148,7 @@
           </form>
         </div>
       </div>
-    </div>
+    
 
     <div class="popup popup_type_img-open">
       <div class="popup__box">
@@ -161,6 +161,29 @@
       </div>
     </div>
 
+    <div class="popup popup_type_confirm">
+      <div class="popup__container">
+        <button
+          class="popup__close-button"
+          type="button"
+        ></button>
+        <h3 class="popup__heading">Вы уверены?</h3>
+        <form
+          class="popup__form"
+          name="confirm"
+          novalidate
+        >
+          <button
+            class="popup__save-button"
+            type="submit"
+          >
+            Да
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
     <template id="template">
       <div class="element">
         <button
@@ -171,12 +194,14 @@
         <img class="element__image" alt="карточка" src="#" />
         <div class="element__description">
           <h2 class="element__title">название</h2>
+          <div class="element__like-box">
           <button
             aria-label="лайк"
             class="element__like-btn"
             type="button"
           ></button>
           <span class="element__like-nmb"></span>
+          </div>
         </div>
       </div>
     </template>

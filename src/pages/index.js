@@ -12,15 +12,18 @@ import {
   formAddElement,
   nameInput,
   jobInput,
-  validationConfig,
+  validationConfig
 } from "../utils/constants.js";
 import { api } from '../components/Api.js'
 
 import "../pages/index.css";
 
+let userId
+
 api.getProfile()
 .then(res => {
-  userInfo.setUserInfo(res.name, res.about)
+  userInfo.setUserInfo(res.name, res.about);
+  userId = res._id
 })
 
 api.getInitialCards()
@@ -29,7 +32,10 @@ api.getInitialCards()
     const card = createCard({
       name: data.name,
       link: data.link,
-      likes: data.likes
+      likes: data.likes,
+      _id: data._id,
+      userId: userId,
+      ownerId: data.owner._id
     })
     cardList.addItem(card)
   })
@@ -49,7 +55,31 @@ validationAddCard.enableValidation();
 
 //создание экземпляра класса создания карточки
 const createCard = (data) => {
-  const card = new Card(data, "#template", handleCardClick);
+  const card = new Card(data, "#template", handleCardClick, 
+  (_id) => {
+    popupConfirm.open()
+    popupConfirm.changeSubmitHandler(() => {
+      api.deleteMyCard(_id)
+      .then(() => {
+        card.deleteCard()
+        popupConfirm.close()
+      })
+    })
+  },
+  (_id) => {
+    if(card.isLiked()) {
+      api.deleteLike(_id)
+      .then(res => {
+        card.addLikes(res.likes)
+      })
+    } else {
+    api.putLike(_id)
+    .then(res => {
+      card.addLikes(res.likes)
+    })
+  }
+    
+  });
   const cardElement = card.renderCard();
   return cardElement;
 };
@@ -67,6 +97,8 @@ const cardList = new Section(
 //добавление первоначального списка карточек на страницу при загрузке
 //cardList.renderItems({ items: initialCards });
 cardList.renderItems({ items: [] });
+
+//const handleDeleteClick = 
 
 //создание экземпляра класса попапа с картинкой
 const popupImageOpen = new PopupWithImage(".popup_type_img-open");
@@ -103,7 +135,10 @@ api.postCard(data["card-name-input"], data['card-url-input'])
   const newCardItem = createCard({
     name: data["card-name-input"],
     link: data['card-url-input'],
-    likes: data.likes
+    likes: data.likes,
+    _id: data._id,
+    userId: userId,
+    ownerId: data.owner._id
   })
     cardList.addItem(newCardItem, true);
   popupAddCard.close();
@@ -117,6 +152,13 @@ const popupAddCard = new PopupWithForm(
   handleAddCardFormSubmit
 );
 popupAddCard.setEventListeners();
+
+
+//создание экземпляра класса попапа подтверждения удаления карточки 
+const popupConfirm = new PopupWithForm(
+  ".popup_type_confirm"
+);
+popupConfirm.setEventListeners();
 
 //создание экземпляра класса получения данных пользователя для внесения данных в профиль
 const userInfo = new UserInfo({
@@ -138,3 +180,5 @@ profileAddButton.addEventListener("click", () => {
   validationAddCard.resetValidation();
   popupAddCard.open();
 });
+
+

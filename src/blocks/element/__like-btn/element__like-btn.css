@@ -5,6 +5,7 @@
     transition: opasity .3s;
     border: none;
     padding: 0;
+    margin-bottom: 3px;
 }
 
 .element__like-btn:hover {
