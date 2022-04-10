@@ -98,8 +98,6 @@ const cardList = new Section(
 //cardList.renderItems({ items: initialCards });
 cardList.renderItems({ items: [] });
 
-//const handleDeleteClick = 
-
 //создание экземпляра класса попапа с картинкой
 const popupImageOpen = new PopupWithImage(".popup_type_img-open");
 
