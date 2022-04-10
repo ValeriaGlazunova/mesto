@@ -8,8 +8,10 @@ import { UserInfo } from "../components/UserInfo.js";
 import {
   profileEditOpenPopupButton,
   profileAddButton,
+  avatarEditButton,
   formEditElement,
   formAddElement,
+  formPopupEditElement,
   nameInput,
   jobInput,
   validationConfig
@@ -18,12 +20,13 @@ import { api } from '../components/Api.js'
 
 import "../pages/index.css";
 
-let userId
+let userId;
 
 api.getProfile()
 .then(res => {
   userInfo.setUserInfo(res.name, res.about);
-  userId = res._id
+  userInfo.setUserAvatar(res.avatar);
+  userId = res._id;
 })
 
 api.getInitialCards()
@@ -49,9 +52,12 @@ const validationProfileEdit = new FormValidator(
 );
 const validationAddCard = new FormValidator(validationConfig, formAddElement);
 
+const validationAvatarChange = new FormValidator(validationConfig, formPopupEditElement);
+
 //запуск работы валидации
 validationProfileEdit.enableValidation();
 validationAddCard.enableValidation();
+validationAvatarChange.enableValidation();
 
 //создание экземпляра класса создания карточки
 const createCard = (data) => {
@@ -109,7 +115,7 @@ popupImageOpen.setEventListeners();
 
 //функция-колбэк внесения данных в профиль
 const handleProfileEditFormSubmit = (data) => {
-  const { name, job } = data;
+  const { name, job} = data;
   api.editProfile(name, job)
   .then(() => {
     userInfo.setUserInfo(name, job)
@@ -158,10 +164,25 @@ const popupConfirm = new PopupWithForm(
 );
 popupConfirm.setEventListeners();
 
+const handleAvatarEditFormSubmit = (data) => {
+   // console.log(inputValues);
+  api.changeAvatar(data['avatar-url-input'])
+  .then(() => {
+    userInfo.setUserAvatar(data['avatar-url-input']);
+    popupAvatarChange.close()
+  })
+  
+}
+
+//создание экземпляра класса попапа изменения аватара
+const popupAvatarChange = new PopupWithForm('.popup_type_change-avatar', handleAvatarEditFormSubmit);
+popupAvatarChange.setEventListeners();
+
 //создание экземпляра класса получения данных пользователя для внесения данных в профиль
 const userInfo = new UserInfo({
   nameSelector: ".profile__name",
   jobSelector: ".profile__description",
+  avatarSelector: '.profile__avatar'
 });
 
 //подписка на слушатель кнопки открытия попапа изменения профиля
@@ -178,5 +199,11 @@ profileAddButton.addEventListener("click", () => {
   validationAddCard.resetValidation();
   popupAddCard.open();
 });
+
+//подписка на слушатель кнопки открытия попапа редактирования аватара
+avatarEditButton.addEventListener('click', () => {
+  validationAvatarChange.resetValidation();
+  popupAvatarChange.open();
+})
 
 
