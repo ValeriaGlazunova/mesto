@@ -10,13 +10,10 @@ export class UserInfo {
       job: this._job.textContent,
     };
   }
-  setUserInfo(name, job) {
+  setUserInfo({ name, about, avatar, _id }) {
     this._name.textContent = name;
-    this._job.textContent = job;
-
-  }
-
-  setUserAvatar(avatar){
+    this._job.textContent = about;
     this._avatar.src = avatar;
+    this._id = _id;
   }
 }

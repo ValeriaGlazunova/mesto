@@ -18,6 +18,8 @@ export class Card {
     this._handleCardClick = handleCardClick;
     this._handleDeleteClick = handleDeleteClick;
     this._handleLikeClick = handleLikeClick;
+    
+
   }
 
   deleteCard = () => {
@@ -45,9 +47,9 @@ export class Card {
   }
 
   addLikes(newLikes) {
-    this._likes = newLikes;
-    const likesCounter = this._cardElement.querySelector(".element__like-nmb");
-    likesCounter.textContent = this._likes.length;
+    this._likes = newLikes; 
+    
+    this._likesCounter.textContent = this._likes.length;
 
     if (this.isLiked()) {
       this._likeCard();
@@ -71,6 +73,7 @@ export class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._cardElement.querySelector(".element__title").textContent = this._name;
+    this._likesCounter = this._cardElement.querySelector(".element__like-nmb"); 
 
     this._likeButton = this._cardElement.querySelector(".element__like-btn");
     this.addLikes(this._likes);
@@ -84,4 +87,8 @@ export class Card {
 
     return this._cardElement;
   }
+
+  
 }
+
+

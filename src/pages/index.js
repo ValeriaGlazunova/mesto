@@ -10,9 +10,9 @@ import {
   avatarEditButton,
   formEditElement,
   formAddElement,
-  formPopupEditElement,
   nameInput,
   jobInput,
+  formPopupEditElement,
   validationConfig,
 } from "../utils/constants.js";
 import { api } from "../components/Api.js";
@@ -21,27 +21,17 @@ import "../pages/index.css";
 
 let userId;
 
-//получение изначальных данных профила
-api.getProfile().then((res) => {
-  userInfo.setUserInfo(res.name, res.about);
-  userInfo.setUserAvatar(res.avatar);
-  userId = res._id;
-});
 
-//отображение изначальных карточек на странице
-api.getInitialCards().then((list) => {
-  list.forEach((data) => {
-    const card = createCard({
-      name: data.name,
-      link: data.link,
-      likes: data.likes,
-      _id: data._id,
-      userId: userId,
-      ownerId: data.owner._id,
-    });
-    cardList.addItem(card);
+//Данные при загрузке страницы (получение данных профиля и карточки)
+Promise.all([api.getProfile(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+      userInfo.setUserInfo(userData);
+      userId = userData._id;
+      cardList.renderItems(cards);
+  })
+  .catch(err => {
+    console.log(err)
   });
-});
 
 //создание экземпляров классов валидации
 const validationProfileEdit = new FormValidator(
@@ -72,6 +62,9 @@ const createCard = (data) => {
         api.deleteMyCard(_id).then(() => {
           card.deleteCard();
           popupConfirm.close();
+        })
+        .catch(err => {
+          console.log(err)
         });
       });
     },
@@ -79,11 +72,17 @@ const createCard = (data) => {
       if (card.isLiked()) {
         api.deleteLike(_id).then((res) => {
           card.addLikes(res.likes);
-        });
+        })
+        .catch(err => {
+          console.log(err)
+        })
       } else {
         api.putLike(_id).then((res) => {
           card.addLikes(res.likes);
-        });
+        })
+        .catch(err => {
+          console.log(err)
+        })
       }
     }
   );
@@ -94,15 +93,21 @@ const createCard = (data) => {
 //создание экземпляра класса добавления элементов на страницу
 const cardList = new Section(
   {
-    renderer: (item) => {
-      cardList.addItem(createCard(item), false);
+    renderer: (data) => {
+      cardList.addItem(createCard({
+         name: data.name,
+         link: data.link,
+        likes: data.likes,
+        _id: data._id,
+        userId: userId,
+        ownerId: data.owner._id,
+        }), false);
     },
   },
   ".elements"
 );
 
-//добавление первоначального списка карточек на страницу при загрузке
-cardList.renderItems({ items: [] });
+
 
 //создание экземпляра класса попапа с картинкой
 const popupImageOpen = new PopupWithImage(".popup_type_img-open");
@@ -119,13 +124,17 @@ const handleProfileEditFormSubmit = (data) => {
   const { name, job } = data;
   api
     .editProfile(name, job)
-    .then(() => {
-      userInfo.setUserInfo(name, job);
+    .then((res) => {
+      userInfo.setUserInfo(res);
+      popupEditProfile.close();
+    })
+    .catch(err => {
+      console.log(err)
     })
     .finally(() => {
       popupEditProfile.changeLoadingText(false);
     });
-  popupEditProfile.close();
+  
 };
 
 //создание экземпляра класса попапа изменения профиля
@@ -152,6 +161,9 @@ const handleAddCardFormSubmit = (data) => {
       cardList.addItem(newCardItem, true);
       popupAddCard.close();
     })
+    .catch(err => {
+      console.log(err)
+    })
     .finally(() => {
       popupAddCard.changeLoadingText(false);
     });
@@ -172,9 +184,12 @@ const handleAvatarEditFormSubmit = (data) => {
   popupAvatarChange.changeLoadingText(true);
   api
     .changeAvatar(data["avatar-url-input"])
-    .then(() => {
-      userInfo.setUserAvatar(data["avatar-url-input"]);
+    .then((res) => {
+      userInfo.setUserInfo(res);
       popupAvatarChange.close();
+    })
+    .catch(err => {
+      console.log(err)
     })
     .finally(() => {
       popupAvatarChange.changeLoadingText(false);
@@ -198,8 +213,7 @@ const userInfo = new UserInfo({
 //подписка на слушатель кнопки открытия попапа изменения профиля
 profileEditOpenPopupButton.addEventListener("click", () => {
   const data = userInfo.getUserInfo();
-  nameInput.value = data.name;
-  jobInput.value = data.job;
+  popupEditProfile.setInputValues(data);
   validationProfileEdit.resetValidation();
   popupEditProfile.open();
 });
