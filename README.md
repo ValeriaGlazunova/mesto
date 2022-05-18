@@ -11,6 +11,7 @@
 БЭМ Nested, HTML, CSS, адаптивная верстка, flex, grid-layout, JavaScript, ООП, API, Webpack
 
 ### Статус проекта
+
 Завершен
 
 * [Ссылка на GitHub Pages](https://valeriaglazunova.github.io/mesto)
